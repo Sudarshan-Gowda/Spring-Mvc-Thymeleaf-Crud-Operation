@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Spring MVC with Thymeleaf Crud Example</title>
+<link rel="icon" th:href="@{/resources/images/sudarshan-logo.png}">
+<link rel="shortcut icon" th:href="@{/resources/images/ico/favicon.ico}"
+	type="image/x-icon">
+
+<style type="text/css">
+.page-title {
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 24px;
+	color: #4C4C4C;
+}
+
+.mt-1 {
+	margin-top: 1rem !important;
+}
+
+.mb-2, .my-2 {
+	margin-bottom: 0.5rem !important;
+}
+</style>
+
+</head>
+
+<body>
+	<div id="fullpage">
+
+		<div class="header" th:substituteBy="common/welcome-header"
+			th:remove="tag"></div>
+
+		<div class="container" th:substituteBy="common/message"
+			th:remove="tag"></div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-6 mt-4">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+
+							<li class="breadcrumb-item" style="color: blue;">Employee
+								Details</li>
+						</ol>
+					</nav>
+				</div>
+
+				<div class="col-1"></div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+
+				<div class="col-7">
+					<div class="page-title">Enter the details below</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+
+				<form th:action="@{${actionUrl}}" method="post"
+					th:object="${employee}">
+
+					<div id="fileDnDiv" class="col-12 row" style="margin-top: 25px;">
+
+						<div class="col-12">
+							<div class="border-bottom mt-1 mb-2"></div>
+						</div>
+
+						<div class="col-sm-6">
+
+							<div th:if="${record!=null && record == 'VIEW'}">
+								<label class="required">Employee Name</label> <input
+									type="hidden" th:field="*{empId}"> <input
+									th:field="*{empName}" class="form-control required"
+									required="required" disabled="disabled"></input> <label
+									class="required">Employee Designation</label> <input
+									th:field="*{empDesign}" class="form-control required"
+									required="required" disabled="disabled"></input> <label
+									class="required">Employee Department</label> <input
+									th:field="*{empDept}" class="form-control required"
+									required="required" disabled="disabled"></input> <label
+									class="required">Employee Address</label>
+								<textarea th:field="*{empAddress}" class="form-control required"
+									required="required" disabled="disabled"></textarea>
+							</div>
+
+							<div th:unless="${record!=null && record == 'VIEW'}">
+
+								<label class="required">Employee Name</label> <input
+									type="hidden" th:field="*{empId}"> <input
+									th:field="*{empName}" class="form-control required"
+									required="required"></input> <label class="required">Employee
+									Designation</label> <input th:field="*{empDesign}"
+									class="form-control required" required="required"></input> <label
+									class="required">Employee Department</label> <input
+									th:field="*{empDept}" class="form-control required"
+									required="required"></input> <label class="required">Employee
+									Address</label>
+								<textarea th:field="*{empAddress}" class="form-control required"
+									required="required"></textarea>
+							</div>
+						</div>
+
+						<div class="col-sm-1"></div>
+						<div class="col-sm-5">
+							<div class="auto_image">
+								<img th:src="@{/resources/images/emp.jpg}" alt=""
+									style="width: 410px;">
+							</div>
+						</div>
+
+						<div class="col-sm-12">
+							<div class="border-bottom mt-1 mb-2"></div>
+						</div>
+
+						<div class="col-sm-12">
+
+							<span th:if="${record!=null && record == 'VIEW' }"> <a
+								th:href="@{/employee/list}" class="btn btn-info">Go Back</a>
+							</span> <span th:unless="${record!=null && record == 'VIEW' }">
+								<button type="submit" class="btn btn-info">Submit</button> <span
+								th:if="${record!=null && record == 'NEW' }"></span>
+								<button type="reset" class="btn btn-danger">Cancel</button> <a
+								th:href="@{/employee/list}" class="btn btn-info">Go Back</a>
+							</span>
+
+						</div>
+
+					</div>
+
+				</form>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<div th:substituteBy="common/login-footer" th:remove="tag"></div>
+</body>
+</html>

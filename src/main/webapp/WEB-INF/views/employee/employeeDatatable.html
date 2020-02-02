@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Spring MVC with Thymeleaf Crud Example</title>
+
+<link rel="icon" th:href="@{/resources/images/sudarshan-logo.png}" />
+<link rel="shortcut icon" th:href="@{/resources/images/ico/favicon.ico}" />
+
+
+<style type="text/css">
+.page-title {
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 24px;
+	color: #4C4C4C;
+}
+
+.content_register {
+	width: 98.9%;
+	height: auto;
+	float: left;
+	margin-top: 55px;
+}
+
+div.dataTables_wrapper div.dataTables_filter label {
+	font-weight: normal;
+	white-space: nowrap;
+	text-align: left;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+	text-align: right;
+}
+
+.mt-1 {
+	margin-top: 1rem !important;
+}
+
+.mb-2, .my-2 {
+	margin-bottom: 0.5rem !important;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+	width: 75px;
+	display: inline-block;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+	text-align: right;
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+	margin-left: 0.5em;
+	display: inline-block;
+	width: auto;
+}
+</style>
+
+</head>
+
+
+<body>
+	<div id="fullpage">
+
+		<div class="header" th:substituteBy="common/welcome-header"
+			th:remove="tag"></div>
+			
+		<div class="container" th:substituteBy="common/message"
+			th:remove="tag"></div>	
+
+		<div class="container" style="margin-top: 50px;">
+			<div class="row">
+
+				<div class="col-sm-10">
+					<div class="page-title">Manage Employee List</div>
+				</div>
+
+
+				<div class="col-sm-2">
+
+					<div class="btn-group" role="group"
+						aria-label="Button group with nested dropdown">
+
+						<a href="javascript:void(0)" class="btn btn-primary"
+							data-toggle="tooltip" data-placement="bottom" title=""
+							data-original-title="Add New"
+							onclick="location.href='/Spring-Mvc-Thymeleaf-Crud-Operation/employee/add'">Add
+							New</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="content_register">
+
+			<div class="container">
+
+
+				<div class="row">
+
+					<div class="panel-body">
+
+						<table class="table table-striped table-bordered table-hover"
+							id="example-table">
+							<thead>
+								<tr class="table_header">
+									<th>Employee Name</th>
+									<th>Designation</th>
+									<th>Department</th>
+									<th>Address</th>
+									<th style="width: 200px;">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<div th:if="${dtos!= null && dtos.size() > 0}">
+								<tr th:each="employee : ${dtos}">
+									<td><a
+										th:href="@{'/employee/view?radio='+${employee.empId}}"
+										th:text="${employee.empName}"></a></td>
+									<td th:text="${employee.empDesign}"></td>
+									<td th:text="${employee.empDept}"></td>
+									<td th:text="${employee.empAddress}"></td>
+									<td><a
+										th:href="@{'/employee/view?radio='+${employee.empId}}">View</a>
+										| <a th:href="@{'/employee/modify?radio='+${employee.empId}}">Update</a>
+										| <a th:href="@{'/employee/delete?radio='+${employee.empId}}">Delete</a></td>
+								</tr>
+								</div>
+								
+								<div th:unless="${dtos!= null && dtos.size() > 0}">
+								<tr class="odd">
+									<td valign="top" colspan="6" class="dataTables_empty"
+										style="text-align: center;">No Records to Display</td>
+								</tr>
+								</div>
+
+							</tbody>
+						</table>
+
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<script type="text/javascript">
+		$(function() {
+			$('#example-table')
+					.DataTable(
+							{
+								pageLength : 5,
+								"oLanguage" : {
+									"sSearch" : "Search",
+									"sZeroRecords" : "No Records to Display",
+									"sLengthMenu" : "Show &nbsp;_MENU_",
+									"sInfo" : "showing _START_ - _END_ of _TOTAL_ records",
+									"sInfoEmpty" : "showing 0 records",
+									"sProcessing" : "Processing",
+									"sInfoFiltered" : "",
+									"oPaginate" : {
+										"sFirst" : "first",
+										"sPrevious" : "Previous",
+										"sNext" : "Next",
+										"sLast" : "last"
+									},
+								},
+								"columns" : [ {
+									"orderable" : false
+								}, {
+									"data" : "audtEvent"
+								}, {
+									"data" : "audtTimestamp"
+								}, {
+									"data" : "audtUid"
+								}, {
+									"data" : "audtUname"
+								} ]
+							});
+		})
+	</script>
+
+	<div th:substituteBy="common/audit_script"
+		th:remove="tag"></div>
+
+	<div th:substituteBy="common/login-footer"
+		th:remove="tag"></div>
+
+</body>
+</html>
