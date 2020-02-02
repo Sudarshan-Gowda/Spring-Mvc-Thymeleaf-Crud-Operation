@@ -42,7 +42,7 @@
 
 		<!-- 3rd Party Library -->
 		<mysql-version>5.1.6</mysql-version>
-		<com.mchange.c3p0-version>0.9.5.2</com.mchange.c3p0-version>
+		<com.mchange.c3p0-version>0.9.5.4</com.mchange.c3p0-version>
 		<com.mchange.commons-version>0.2.10</com.mchange.commons-version>
 
 		<!-- Thymeleaf -->
